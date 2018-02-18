@@ -12,6 +12,18 @@
            {
 		int pid, isAllocated;
 	            }obj[MAX_PID-MIN_PID];
+	
+	int allocate_map() 
+   {
+		int i=MIN_PID;
+		while(i<=MAX_PID)
+           {
+			obj[i-MIN_PID].pid=i;
+			obj[i-MIN_PID].isAllocated=0;
+			i++;
+		}
+		return 1;
+	}
 				      
     int main() 
 	{
