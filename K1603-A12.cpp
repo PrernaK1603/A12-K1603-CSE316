@@ -24,6 +24,24 @@
 		}
 		return 1;
 	}
+	
+	int allocate_pid()
+   {
+		int i=0;
+		while(i<MAX_PID)
+        {
+			if (obj[i]. isAllocated==0) 
+                       {
+				pthread_mutex_lock(&Lock);
+				obj[i]. isAllocated=1;
+				pthread_mutex_unlock(&Lock);
+				return obj[i].pid;
+			}
+			i++;
+		}
+		return -1;
+	}
+	
 				      
     int main() 
 	{
