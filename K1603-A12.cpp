@@ -63,7 +63,41 @@
 		}
 	}
 	
-				      
+	void* Func(void *args) 
+{
+		int pid=allocate_pid();
+		printf("New process created with pid: %d\n",pid);
+		int time=(rand()+20)%(40+1);
+		sleep(time);
+		release_pid(pid);
+		printf("Process destroyed with pid: %d\n",pid);
+	}
+	
+	
+	void createProcess() 
+{
+		int i=0,n;
+            printf(“How many threads you want to create?”);
+            scanf(“%d”,&n);
+		pthread_t threadPid[n];
+		if(pthread_mutex_init(&Lock,NULL)!=0)
+			printf("Mutex init.");
+		while(i<n) 
+           {
+			pthread_create(&threadPid[i],NULL,Func,NULL);
+			sleep(1);
+			i++;
+		}
+	
+		i=0;
+		while(i<n) 
+           {
+			pthread_join(threadPid[i],NULL);
+			i++;
+		}	
+	
+	
+                }			      
     int main() 
 	{
  	if(allocate_map()) 
